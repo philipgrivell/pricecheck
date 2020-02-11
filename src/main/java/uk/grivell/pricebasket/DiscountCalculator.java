@@ -16,6 +16,7 @@ public class DiscountCalculator {
     private OfferRepository offers;
 
     public void applyDiscount(Basket basket, BasketItem item) {
+        // Apply discount based on whether a product matches an offer
         Offer offer = offers.findByProductName(item.getProduct().getName());
         if (offer != null && matchesRule(basket, offer.getRule())) {
             item.setDiscount(offer.getDiscount());

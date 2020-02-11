@@ -3,8 +3,6 @@ package uk.grivell.pricebasket;
 import uk.grivell.pricebasket.persistence.Product;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.Optional;
 
 public class BasketItem {
@@ -35,6 +33,7 @@ public class BasketItem {
     }
 
     public BigDecimal getDiscount() {
+        // Calculate total discount based on number of items.
         return Optional.ofNullable(discount)
                 .map(d -> getTotalPrice().multiply(d).setScale(2, BigDecimal.ROUND_HALF_DOWN))
                 .orElse(new BigDecimal(0));
